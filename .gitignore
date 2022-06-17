@@ -4,6 +4,7 @@ PrometheusAlert.exe
 logo
 .idea
 logs/
+logs/prometheusalertcenter.log
 example/linux
 example/windows
 vendor
