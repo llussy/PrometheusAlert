@@ -3,11 +3,12 @@ package main
 import (
 	"PrometheusAlert/models"
 	_ "PrometheusAlert/routers"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/robfig/cron/v3"
 	"os"
 	"path"
 	"runtime"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/robfig/cron/v3"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -25,11 +26,6 @@ var (
 	BuildDate string
 	GoVersion = runtime.Version()
 )
-
-func IsExist(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil || os.IsExist(err)
-}
 
 func init() {
 	db_driver := beego.AppConfig.String("db_driver")
@@ -102,4 +98,9 @@ func main() {
 	models.MetricsInit()
 	beego.Handler("/metrics", promhttp.Handler())
 	beego.Run()
+}
+
+func IsExist(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil || os.IsExist(err)
 }

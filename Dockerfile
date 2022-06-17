@@ -2,7 +2,7 @@ FROM golang:1.16-alpine3.12 as builder
 
 WORKDIR $GOPATH/src/github.com/feiyu563/PrometheusAlert
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add --no-cache gcc g++ sqlite-libs make git
 
@@ -19,7 +19,7 @@ FROM alpine:3.12
 
 LABEL maintainer="jikun.zhang"
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories && \
     apk add tzdata && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \

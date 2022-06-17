@@ -46,8 +46,6 @@ func (c *LoginController) Post() {
 		//	beego.Error(err)
 		//}
 	}
-
-	//return
 }
 
 //检查cookie是否为登录状态

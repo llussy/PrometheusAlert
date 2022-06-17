@@ -1,6 +1,6 @@
 pkgs	= $(shell go list ./... | grep -v vendor/)
 
-DOCKER_IMAGE_NAME ?= feiyu563/prometheus-alert
+DOCKER_IMAGE_NAME ?= llussy/prometheus-alert
 
 BRANCH 		?= $(shell git rev-parse --abbrev-ref HEAD)
 BUILDDATE   ?= $(shell date -I'seconds')
@@ -35,9 +35,8 @@ test:
 build:
 	@echo ">> building code"
 	go mod tidy
-	go mod vendor
-	GO11MODULE=on GO111MODULE=on GOPROXY=https://goproxy.io \
-	  go build -ldflags "$(VERSION_LDFLAGS)" -o PrometheusAlert
+	GO111MODULE=on GOPROXY=https://goproxy.io \
+	go build -ldflags "$(VERSION_LDFLAGS)" -o PrometheusAlert
 
 .PHONY: docker
 docker:
