@@ -9,3 +9,4 @@ example/linux
 example/windows
 vendor
 old_delete/
+.vscode
