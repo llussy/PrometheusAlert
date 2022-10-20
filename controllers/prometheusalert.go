@@ -234,6 +234,13 @@ func AlertRouterSet(xalert map[string]interface{}, PMsg PrometheusAlertMsg, Tpl 
 		rules_num := len(LabelMap)
 		rules_num_match := 0
 
+		//判断如果是恢复告警, 并且设置不发送恢复告警, 则跳过
+		if xalert["status"] == "resolved" && router_value.SendResolved == false {
+			alertName := xalert["labels"].(map[string]interface{})["alertname"].(string)
+			logs.Info("告警名称：", alertName, "路由规则：", router_value.Name, "路由类型：", router_value.Tpl.Tpltype, "路由恢复告警：", router_value.SendResolved)
+			continue
+		}
+
 		for _, rule := range LabelMap {
 			for label_key, label_value := range xalert["labels"].(map[string]interface{}) {
 				//这里需要分两部分处理，一部分是正则规则，一部分是非正则规则
@@ -443,10 +450,10 @@ func SendMessagePrometheusAlert(message string, pmsg *PrometheusAlertMsg, logsig
 	case "dd":
 		Ddurl := strings.Split(pmsg.Ddurl, ",")
 		if pmsg.RoundRobin == "true" {
-			ReturnMsg += PostToDingDing(Title+"告警消息", message, DoBalance(Ddurl), pmsg.AtSomeOne, logsign)
+			ReturnMsg += PostToDingDing(Title, message, DoBalance(Ddurl), pmsg.AtSomeOne, logsign)
 		} else {
 			for _, url := range Ddurl {
-				ReturnMsg += PostToDingDing(Title+"告警消息", message, url, pmsg.AtSomeOne, logsign)
+				ReturnMsg += PostToDingDing(Title, message, url, pmsg.AtSomeOne, logsign)
 			}
 		}
 
@@ -454,10 +461,10 @@ func SendMessagePrometheusAlert(message string, pmsg *PrometheusAlertMsg, logsig
 	case "fs":
 		Fsurl := strings.Split(pmsg.Fsurl, ",")
 		if pmsg.RoundRobin == "true" {
-			ReturnMsg += PostToFS(Title+"告警消息", message, DoBalance(Fsurl), pmsg.AtSomeOne, logsign)
+			ReturnMsg += PostToFS(Title, message, DoBalance(Fsurl), pmsg.AtSomeOne, logsign)
 		} else {
 			for _, url := range Fsurl {
-				ReturnMsg += PostToFS(Title+"告警消息", message, url, pmsg.AtSomeOne, logsign)
+				ReturnMsg += PostToFS(Title, message, url, pmsg.AtSomeOne, logsign)
 			}
 		}
 
@@ -517,6 +524,9 @@ func SendMessagePrometheusAlert(message string, pmsg *PrometheusAlertMsg, logsig
 	// Bark
 	case "voice":
 		ReturnMsg += SendVoice(message, logsign)
+	//飞书APP渠道
+	case "fsapp":
+		ReturnMsg += PostToFeiShuApp(Title, message, pmsg.AtSomeOne, logsign)
 	//异常参数
 	default:
 		ReturnMsg = "参数错误"

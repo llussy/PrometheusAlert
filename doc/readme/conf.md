@@ -1,4 +1,4 @@
-## PrometheusAlert配置文件说明
+# PrometheusAlert配置文件说明
 
 PrometheusAlert配置文件中定义了丰富的配置项，默认配置即可满足开箱即用。并且配置文件中每项配置都加入了详细的注释，非常明确的指出了每个配置项的功能和定义。
 
@@ -260,4 +260,21 @@ BARK_COPY=1
 BARK_ARCHIVE=1
 # 消息分组
 BARK_GROUP=PrometheusAlert
+
+#---------------------↓语音播报-----------------------
+#语音播报需要配合语音播报插件才能使用
+#是否开启语音播报通道,0为关闭,1为开启
+open-voice=1
+VOICE_IP=127.0.0.1
+VOICE_PORT=9999
+
+#---------------------↓飞书机器人应用-----------------------
+#是否开启feishuapp告警通道,可同时开始多个通道0为关闭,1为开启
+open-feishuapp=1
+# APPID
+FEISHU_APPID=cli_xxxxxxxxxxxxx
+# APPSECRET
+FEISHU_APPSECRET=xxxxxxxxxxxxxxxxxxxxxx
+# 可填飞书 用户open_id、user_id、union_ids、部门open_department_id
+AT_USER_ID="xxxxxxxx"
 ```

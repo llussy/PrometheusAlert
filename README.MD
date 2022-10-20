@@ -1,4 +1,6 @@
-## PrometheusAlert全家桶
+# PrometheusAlert全家桶
+
+---------------------------------------
 
 ![author](https://img.shields.io/badge/author-jikun.zhang-blueviolet.svg)
 ![license](https://img.shields.io/github/license/feiyu563/PrometheusAlert.svg)
@@ -14,21 +16,19 @@
 [![Travis](https://img.shields.io/badge/language-JavaScript-yellow.svg)]()
 [![Travis](https://img.shields.io/badge/language-Shell-blue.svg)]()
 
------------------
+---------------------------------------
 
 PrometheusAlert是开源的运维告警中心消息转发系统，支持主流的监控系统Prometheus、Zabbix，日志系统Graylog2，Graylog3、数据可视化系统Grafana、SonarQube。阿里云-云监控，以及所有支持WebHook接口的系统发出的预警消息，支持将收到的这些消息发送到钉钉，微信，email，飞书，腾讯短信，腾讯电话，阿里云短信，阿里云电话，华为短信，百度云短信，容联云电话，七陌短信，七陌语音，TeleGram，百度Hi(如流)等。
 
-![it](doc/it.png)
+![it](doc/images/it.png)
 
------------------
+----------------------------------------
+
 * 如果这个项目能为您带来帮助，我将感到非常荣幸！同时非常欢迎您加入PrometheusAlert全家桶的微信群一起探讨关于PrometheusAlert新一期的开发计划。
 
 * PrometheusAlert的成长离不开所有爱好运维和开发的朋友们的支持！如果您也对这个项目感兴趣，请点击一下 Star 以示鼓励，谢谢
 
-
-<br>
-<br>
-
+----------------------------------------
 
 ## 构建
 
@@ -67,10 +67,7 @@ copy conf/app-example.conf conf/app.conf
 curl http://localhost:8080/health
 ```
 
-
-<br/>
-<br/>
-
+-------------------------------------
 
 ## 启动
 
@@ -111,18 +108,16 @@ feiyu563/prometheus-alert:latest
 
 所有的配置文件内容请[点击此处](https://github.com/feiyu563/PrometheusAlert/blob/master/conf/app-example.conf)查看
 
-<br>
-<br>
-
------------------
+---------------------------------------
 
 ![dashboard](doc/images/dashboard.png)
 ![dashboard-test](doc/images/template.png)
 
 --------------------------------------
 
-PrometheusAlert具备如下特性
----------------------
+## PrometheusAlert具备如下特性
+
+--------------------------------------
 
  - 支持任意包含WebHook接口系统的消息作为消息来源，常见的如Prometheus，Zabbix，Graylog2，Graylog3，Grafana，SonarQube和其他WebHook接口的系统。
  - 支持多种类型的发送目标，支持钉钉，企业微信，email，飞书，腾讯短信，腾讯语音，阿里云短信，阿里云语音，华为短信，百度云短信，容联云电话，七陌短信，七陌语音，TeleGram，百度Hi(如流)。
@@ -140,11 +135,14 @@ PrometheusAlert具备如下特性
  - 增加支持将Gitlab webhook event推送到企微和钉钉。
  - 增加告警路由和告警记录功能，可通过页面查看告警历史和操作告警消息路由。
  - 增加告警语音播报插件。
+ - 增加支持飞书机器人应用。
 
----------------------
+-------------------------------------
 
-致谢以下伙伴对PrometheusAlert的贡献
----------------------
+## 致谢以下伙伴对PrometheusAlert的贡献
+
+--------------------------------------
+
  - [@cyancow](https://github.com/cyancow)
  - [@birkh8792](https://github.com/birkh8792)
  - [@minibear2333](https://github.com/minibear2333)
@@ -155,10 +153,11 @@ PrometheusAlert具备如下特性
  - [@guvmao](https://github.com/guvmao)
  - [@lusson-luo](https://github.com/lusson-luo)
 
-
 --------------------------------------
 
 ## PrometheusAlert全家桶新手入门
+
+--------------------------------------
 
 ### 系统接入PrometheusAlert流程
 
@@ -166,9 +165,11 @@ PrometheusAlert具备如下特性
 
 #### 一般情况下如果使用的是钉钉，企业微信、飞书等机器人作为接收目标的，可以不去配置PrometheusAlert的配置文件app.conf；但是如果需要使用如短信，电话，邮箱等功能，则需要先配置好app.conf中的相关配置项方可使用。
 
-- 1.安装好PrometheusAlert 参考：[安装部署PrometheusAlert](base-install.md)
-- 2.配置 app.conf [可选] 参考：[【 app.conf 默认参数配置】](conf.md)
+- 1.安装好PrometheusAlert 参考：[安装部署PrometheusAlert](doc/readme/base-install.md)
+- 2.配置 app.conf [可选] 参考：[【 app.conf 默认参数配置】](doc/readme/conf.md)
 - 3.配置告警系统接入PrometheusAlert 参考：[【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
+
+-------------------------------------
 
 ### 目录
 
@@ -195,6 +196,7 @@ PrometheusAlert具备如下特性
   * [百度Hi(如流)告警配置](doc/readme/conf-ruliu.md)
   * [告警记录-ES接入配置](doc/readme/conf-es.md)
   * [语音播报](doc/readme/conf-voice.md)
+  * [飞书机器人应用](doc/readme/conf-feishuapp.md)
 
 * [【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
   * [Prometheus 接入配置](doc/readme/system-prometheus.md)
@@ -209,6 +211,7 @@ PrometheusAlert具备如下特性
   * [★ 进阶用法--自定义模版](doc/readme/system-customtpl.md)
   * [★ 进阶用法--自定义模版函数(时区转换、文本操作等)](doc/readme/system-func.md)
   * [★ 进阶用法--自定义模版参数说明](doc/readme/system-var.md)
+  * [★ 进阶用法--go模版语法](doc/readme/system-go-template.md)
 
 * [【Dashboard页面功能使用】](doc/readme/web.md)
   * [【告警路由功能】](doc/readme/web-router.md)
@@ -223,19 +226,19 @@ PrometheusAlert具备如下特性
 
 项目源码
 
-----
+--------------------------------------
 
  - [【GitHub】: PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
  - [【码云】: PrometheusAlert](https://gitee.com/feiyu563/PrometheusAlert)
 
----
+--------------------------------------
 
 加入PrometheusAlert微信交流群
 
-----
+--------------------------------------
 
 
-![me](doc/wx.png)
+![me](doc/images/wx.png)
 
 ---
 

@@ -1,16 +1,16 @@
-## 企业微信告警配置
+# 企业微信告警配置
 
 打开企业微信,进入企业微信群中,选择群设置-->群机器人-->添加，可参下图：
 
-![wx1](../wx1.png)
+![wx1](../images/wx1.png)
 
-![wx2](../wx2.png)
+![wx2](../images/wx2.png)
 
 复制图中的Webhook地址，并填入PrometheusAlert配置文件app.conf中对应配置项即可。
 
  **PS: 企业微信机器人目前已经支持 `@某人` ,使用该功能需要通过企业微信管理后台取得对应用户的帐号，如下图：**
 
-![wx2](../wx3.png)
+![wx2](../images/wx3.png)
 
 
 企业微信机器人目前支持的markdown语法是如下的子集：
@@ -50,4 +50,26 @@
 open-weixin=1
 #默认企业微信机器人地址
 wxurl=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxx
+```
+
+
+**如何使用**
+
+以Prometheus配合自定义模板为例：
+
+Prometheus配置参考：
+
+```
+global:
+  resolve_timeout: 5m
+route:
+  group_by: ['instance']
+  group_wait: 10m
+  group_interval: 10s
+  repeat_interval: 10m
+  receiver: 'web.hook.prometheusalert'
+receivers:
+- name: 'web.hook.prometheusalert'
+  webhook_configs:
+  - url: 'http://[prometheusalert_url]:8080/prometheusalert?type=wx&tpl=prometheus-wx&wxurl=微信机器人地址,微信机器人地址2&at=zhangsan,lisi'
 ```

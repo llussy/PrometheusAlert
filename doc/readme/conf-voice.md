@@ -1,4 +1,4 @@
-PrometheusAlert全家桶语音播报配置说明
+# PrometheusAlert全家桶语音播报配置说明
 
 -----------------
 
@@ -10,7 +10,7 @@ WebHook--> PrometheusAlert --> PrometheusAlert语音播报组件
 
 语音播报插件目前仅支持windows系统。
 
-![voice](../voice_app.png)
+![voice](../images/voice_app.png)
 
 ```
 #---------------------↓语音播报-----------------------
@@ -19,4 +19,25 @@ WebHook--> PrometheusAlert --> PrometheusAlert语音播报组件
 open-voice=1
 VOICE_IP=127.0.0.1
 VOICE_PORT=9999
+```
+
+**如何使用**
+
+以Prometheus配合自定义模板为例：
+
+Prometheus配置参考：
+
+```
+global:
+  resolve_timeout: 5m
+route:
+  group_by: ['instance']
+  group_wait: 10m
+  group_interval: 10s
+  repeat_interval: 10m
+  receiver: 'web.hook.prometheusalert'
+receivers:
+- name: 'web.hook.prometheusalert'
+  webhook_configs:
+  - url: 'http://[prometheusalert_url]:8080/prometheusalert?type=voice&tpl=prometheus-voice'
 ```
